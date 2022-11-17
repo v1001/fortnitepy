@@ -279,7 +279,7 @@ class Presence:
                  'has_properties', 'homebase_rating', 'lfg',
                  'sub_game', 'in_unjoinable_match', 'playlist', 'party_size',
                  'max_party_size', 'game_session_join_key',
-                 'server_player_count', 'gameplay_stats', 'party')
+                 'server_player_count', 'gameplay_stats', 'party','mnemonic')
 
     def __init__(self, client: 'Client',
                  from_id: str,
@@ -346,14 +346,19 @@ class Presence:
         if self.server_player_count is not None:
             self.server_player_count = int(self.server_player_count)
 
-        if 'FortGameplayStats_j' in raw_properties:
+        if 'KairosProfile_j' in raw_properties:
             self.gameplay_stats = PresenceGameplayStats(
                 self.friend,
-                raw_properties['FortGameplayStats_j'],
+                raw_properties['KairosProfile_j'],
                 players_alive
             )
         else:
             self.gameplay_stats = None
+            
+        if 'FortGameplayStats_s' in raw_properties:
+            self.mnemonic = raw_properties['FortGameplayStats_s']
+        else:
+            self.mnemonic = None
 
         key = "party.joininfodata.286331153_j"
         if key is None:
