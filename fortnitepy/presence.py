@@ -302,7 +302,7 @@ class Presence:
                            data['SessionId'] != "" else None)
 
         raw_properties = data.get('Properties', {})
-        print(raw_properties)
+        #print(raw_properties)
         self.has_properties = raw_properties != {}
 
         # All values below will be "None" if properties is empty.
