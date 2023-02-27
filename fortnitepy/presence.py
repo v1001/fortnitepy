@@ -302,7 +302,7 @@ class Presence:
                            data['SessionId'] != "" else None)
 
         raw_properties = data.get('Properties', {})
-        print(raw_properties)
+        #print(raw_properties)
         self.has_properties = raw_properties != {}
 
         # All values below will be "None" if properties is empty.
@@ -347,10 +347,10 @@ class Presence:
         if self.server_player_count is not None:
             self.server_player_count = int(self.server_player_count)
 
-        if 'KairosProfile_j' in raw_properties:
+        if 'FortGameplayStats_j' in raw_properties:
             self.gameplay_stats = PresenceGameplayStats(
                 self.friend,
-                raw_properties['KairosProfile_j'],
+                raw_properties['FortGameplayStats_j'],
                 players_alive
             )
         else:
